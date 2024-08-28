@@ -1,0 +1,7 @@
+<h1>Login Page</h1>
+<!-- <button type="button"><a href="{% url 'home' %}">Login</a></button> -->
+<form action="" method="post">
+    {% csrf_token %}
+    {{frm.as_p}}
+    <input type="submit" value="Login">
+</form>
