@@ -41,28 +41,3 @@ def logout_user(request):
     if 'username' in request.session:
         request.session.flush()
         return redirect(login)
-
-# from django.contrib.auth import authenticate, login
-# from django.shortcuts import redirect, render
-# from HomePage.views import home
-
-
-# # Create your views here.
-# def login(request):
-#     # form = LoginForm()
-#     if request.POST:
-#         # frm = LoginForm(request.POST)
-#         # if frm.is_valid():
-#         #     print("success")
-#         #     frm.save()
-#         # else:
-#         #     print("some error")
-#         data = request.POST
-#         user_name = data.get('username')
-#         password = data.get('password')
-#         print(authenticate(user_name,password))
-#     e)
-    #     return rendr(request, 'login.html'
-    #         redirect(home)
-    #     return render(request, 'login.html')
-    #     return render(request, 'login.html')
