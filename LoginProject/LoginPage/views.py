@@ -13,7 +13,7 @@ def home(request):
         name = request.session['username']
         return render(request, 'home.html', {'name': name})
     else:
-        return redirect('login')
+        return redirect(login)
 @never_cache
 def login(request):
     if 'username' in request.session:
@@ -27,7 +27,7 @@ def login(request):
             if user is not None:
                 request.session['username'] = user.username
                 # auth_login(request, user)
-                return redirect('home')
+                return redirect(home)
             else:
                 # Authentication failed, set error message
                 error = "Invalid username or password. Please try again."
@@ -40,4 +40,4 @@ def logout_user(request):
         raise Http404("Page not found")
     if 'username' in request.session:
         request.session.flush()
-        return redirect('login')
+        return redirect(login)
