@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 
 # Create your views here.
+# view for home page
 @never_cache
 def home(request):
     if 'username' in request.session:
@@ -14,6 +15,7 @@ def home(request):
         return render(request, 'home.html', {'name': name})
     else:
         return redirect(login)
+# view for login page
 @never_cache
 def login(request):
     if 'username' in request.session:
@@ -34,6 +36,7 @@ def login(request):
         except Exception as e:
             error = "An unexpected error occurred during login."
     return render(request, 'login.html', {'error': error})
+# view for log out page
 # @require_POST
 def logout_user(request):
     if request.method != 'POST':
