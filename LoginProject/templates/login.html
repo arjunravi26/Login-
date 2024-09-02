@@ -12,7 +12,7 @@
     <!-- <style media="screen">
          
     </style> -->
-<!-- 
+    <!-- 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'LoginProject/css/style.css' %}"> -->
     {% load static %}
@@ -33,12 +33,11 @@
 
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password" name="password" required>
-
+        {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
         <button type="submit">Log In</button>
         <div>
-            {% if error %}
-            <p style="color:red;">{{ error }}</p>
-            {% endif %}
         </div>
         <!-- <input type="button" value=""> -->
         <!-- <div class="social">
