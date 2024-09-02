@@ -12,10 +12,12 @@ from django.views.decorators.http import require_POST
 def home(request):
     if 'username' in request.session:
         name = request.session['username']
-        return render(request, 'home.html', {'name': name})
+        return render(request, 'home.html', {'name': name, 'count': 1})
     else:
         return redirect(login)
 # view for login page
+
+
 @never_cache
 def login(request):
     if 'username' in request.session:
@@ -25,19 +27,23 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                request.session['username'] = user.username
-                # auth_login(request, user)
-                return redirect(home)
-            else:
-                # Authentication failed, set error message
-                error = "Invalid username or password. Please try again."
+            if username and password:
+                user = authenticate(
+                    request, username=username, password=password)
+                if user is not None:
+                    request.session['username'] = user.username
+                    # auth_login(request, user)
+                    return redirect(home)
+                else:
+                    # Authentication failed, set error message
+                    error = "Invalid username or password. Please try again."
         except Exception as e:
-            error = "An unexpected error occurred during login."
+            error = f"An unexpected error occurred during login. {e}"
     return render(request, 'login.html', {'error': error})
 # view for log out page
 # @require_POST
+
+
 def logout_user(request):
     if request.method != 'POST':
         raise Http404("Page not found")
